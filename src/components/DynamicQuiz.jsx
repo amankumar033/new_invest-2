@@ -193,8 +193,11 @@ const DynamicQuiz = ({ name, phone, startKey }) => {
       // Determine next question
       let nextKey = null;
       
-      if (nextFollowUpInSequence) {
-        // If there are follow-ups, show the next one in sequence
+      // Only check for follow-up questions if we're on insurance-related questions
+      const isInsuranceQuestion = ['insurancetype', 'termold', 'terminsurancecover', 'ropold', 'ropinsurancecover', 'termunitold', 'termunitcover', 'ulipold', 'ulipcover', 'pensioncover', 'pensionold', 'healthold', 'healthcover', 'guarantee', 'notmonthly', 'oldgurantee'].includes(currentKey);
+      
+      if (isInsuranceQuestion && nextFollowUpInSequence) {
+        // If there are follow-ups and we're on an insurance question, show the next one in sequence
         nextKey = nextFollowUpInSequence;
       } else {
         // Check if current question has a next value
